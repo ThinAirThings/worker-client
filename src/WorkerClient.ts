@@ -20,8 +20,8 @@ export class WorkerClient {
             this.on(rxToTx(action), callback)
         }
     }
-    sendMessage = async (action: string, payload: Record<string, any>) => {
-        this.worker.postMessage({action, payload})
+    sendMessage = async (action: string, payload: Record<string, any>, transfer?: StructuredSerializeOptions) => {
+        this.worker.postMessage({action, payload}, transfer)
     }
     private on = (action: string, callback: (payload: any)=>void) => {
         this.actionTable[action] = callback

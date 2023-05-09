@@ -14,8 +14,8 @@ class WorkerClient {
                 this.on((0, txRx_1.rxToTx)(action), callback);
             }
         };
-        this.sendMessage = async (action, payload) => {
-            this.worker.postMessage({ action, payload });
+        this.sendMessage = async (action, payload, transfer) => {
+            this.worker.postMessage({ action, payload }, transfer);
         };
         this.on = (action, callback) => {
             this.actionTable[action] = callback;
