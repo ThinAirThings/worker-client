@@ -16,7 +16,7 @@ class WorkerClient {
                     const reply = (txPayload) => {
                         // Return message
                         this.worker.postMessage({
-                            messageId: rxPayload.messageId,
+                            action: rxPayload.messageId,
                             payload: txPayload
                         });
                     };

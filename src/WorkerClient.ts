@@ -22,7 +22,7 @@ export class WorkerClient {
                 const reply = (txPayload: Record<string, any>) => {
                     // Return message
                     this.worker.postMessage( {
-                        messageId: rxPayload.messageId,
+                        action: rxPayload.messageId,
                         payload: txPayload
                     })
                 }
