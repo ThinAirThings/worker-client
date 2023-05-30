@@ -31,7 +31,6 @@ class WorkerClient {
             // YOU LEFT OFF HERE
             const messageId = (0, nanoid_1.nanoid)();
             return new Promise((resolve, reject) => {
-                console.log("txPayload: ", txPayload);
                 this.actionTable[messageId] = (rxPayload) => {
                     resolve(rxPayload.payload);
                 };
