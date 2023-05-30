@@ -31,6 +31,7 @@ class WorkerClient {
         this.fetch = async (action, txPayload) => {
             // YOU LEFT OFF HERE
             const messageId = (0, nanoid_1.nanoid)();
+            console.log("MessageID", messageId);
             return new Promise((resolve, reject) => {
                 this.actionTable[messageId] = (rxPayload) => {
                     console.log("Received reply with id: ", rxPayload.messageId);

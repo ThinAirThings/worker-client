@@ -40,6 +40,7 @@ export class WorkerClient {
     ): Promise<Record<string, unknown>> => {
         // YOU LEFT OFF HERE
         const messageId = nanoid()
+        console.log("MessageID",  messageId)
         return new Promise((resolve, reject) => {
             this.actionTable[messageId] = (rxPayload: {messageId: string, payload: Record<string, unknown>}) => {
                 console.log("Received reply with id: ", rxPayload.messageId)
