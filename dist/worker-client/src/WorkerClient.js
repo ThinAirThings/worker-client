@@ -15,6 +15,7 @@ class WorkerClient {
                 this.actionTable[(0, txRx_1.rxToTx)(action)] = (rxPayload) => {
                     const reply = (txPayload) => {
                         // Return message
+                        console.log("Replying to message with id: ", rxPayload.messageId);
                         this.worker.postMessage({
                             action: rxPayload.messageId,
                             payload: txPayload
@@ -32,7 +33,7 @@ class WorkerClient {
             const messageId = (0, nanoid_1.nanoid)();
             return new Promise((resolve, reject) => {
                 this.actionTable[messageId] = (rxPayload) => {
-                    console.log("Received reply");
+                    console.log("Received reply with id: ", rxPayload.messageId);
                     resolve(rxPayload.payload);
                 };
                 this.worker.postMessage({
