@@ -41,6 +41,7 @@ export class WorkerClient {
         const messageId = nanoid()
         return new Promise((resolve, reject) => {
             this.actionTable[messageId] = (rxPayload: {messageId: string, payload: Record<string, unknown>}) => {
+                console.log("Received reply")
                 resolve(rxPayload.payload)
             }
             this.worker.postMessage({
