@@ -34,6 +34,7 @@ class WorkerClient {
             console.log("MessageID", messageId);
             return new Promise((resolve, reject) => {
                 this.actionTable[messageId] = (rxPayload) => {
+                    console.log(rxPayload);
                     console.log("Received reply with id: ", rxPayload.messageId);
                     resolve(rxPayload.payload);
                 };
