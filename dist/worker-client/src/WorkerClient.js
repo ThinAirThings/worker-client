@@ -18,7 +18,7 @@ class WorkerClient {
                         console.log("Replying to message with id: ", rxPayload.messageId);
                         this.worker.postMessage({
                             action: rxPayload.messageId,
-                            payload: txPayload
+                            payload: { messageId: rxPayload.messageId, ...txPayload }
                         });
                     };
                     callback(rxPayload, reply);
