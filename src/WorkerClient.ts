@@ -45,7 +45,7 @@ export class WorkerClient {
             this.actionTable[messageId] = (rxPayload: {messageId: string, payload: Record<string, unknown>}) => {
                 console.log(rxPayload)
                 console.log("Received reply with id: ", rxPayload.messageId)
-                resolve(rxPayload.payload)
+                resolve(rxPayload)
             }
             this.worker.postMessage({
                 action,
