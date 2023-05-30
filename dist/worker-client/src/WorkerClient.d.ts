@@ -1,9 +1,10 @@
+type WorkerActionCallback = (payload: any, reply: (payload: Record<string, any>) => void) => void;
 export declare class WorkerClient {
     worker: Worker;
-    actionTable: Record<string, (payload: any) => void>;
-    constructor(worker: Worker, actions: Record<string, (payload: any) => void>);
-    addAction: (action: string, callback: (payload: any) => void) => void;
-    addActions: (actions: Record<string, (payload: any) => void>) => void;
+    actionTable: Record<string, (rxPayload: any) => void>;
+    constructor(worker: Worker, actions: Record<string, WorkerActionCallback>);
+    addActions: (actions: Record<string, WorkerActionCallback>) => void;
     sendMessage: (action: string, payload?: Record<string, any>, transfer?: any) => Promise<void>;
-    private on;
+    fetch: (action: string, txPayload?: Record<string, any>) => Promise<Record<string, unknown>>;
 }
+export {};
