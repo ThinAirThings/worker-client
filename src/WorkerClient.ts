@@ -40,6 +40,7 @@ export class WorkerClient {
         // YOU LEFT OFF HERE
         const messageId = nanoid()
         return new Promise((resolve, reject) => {
+            console.log("txPayload: ",txPayload)
             this.actionTable[messageId] = (rxPayload: {messageId: string, payload: Record<string, unknown>}) => {
                 resolve(rxPayload.payload)
             }
@@ -49,5 +50,6 @@ export class WorkerClient {
                 ...txPayload
             })
         })
+
     }
 }
