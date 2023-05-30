@@ -38,7 +38,7 @@ class WorkerClient {
                 this.worker.postMessage({
                     action,
                     messageId,
-                    ...txPayload
+                    payload: txPayload
                 });
             });
         };
