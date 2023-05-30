@@ -6,10 +6,10 @@ export class WorkerClient {
     actionTable: Record<string, (rxPayload: any)=>void> = {}
     constructor(public worker: Worker, actions: Record<string, WorkerActionCallback>){
         this.addActions(actions)
-        this.worker.onmessage = (event: MessageEvent<{action: string, payload: any}>) => {
-            const {action, payload} = event.data
+        this.worker.onmessage = (event: MessageEvent<{action: string, messageId?:string, payload: any}>) => {
+            const {action, messageId, payload} = event.data
             if (this.actionTable[action]){
-                this.actionTable[action](payload)
+                this.actionTable[action]({messageId, ...payload})
             } 
         } 
     }
@@ -48,10 +48,8 @@ export class WorkerClient {
             }
             this.worker.postMessage({
                 action,
-                payload: {
-                    messageId,
-                    ...txPayload
-                }
+                messageId,
+                payload: txPayload
             })
         })
 

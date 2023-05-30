@@ -39,18 +39,16 @@ class WorkerClient {
                 };
                 this.worker.postMessage({
                     action,
-                    payload: {
-                        messageId,
-                        ...txPayload
-                    }
+                    messageId,
+                    payload: txPayload
                 });
             });
         };
         this.addActions(actions);
         this.worker.onmessage = (event) => {
-            const { action, payload } = event.data;
+            const { action, messageId, payload } = event.data;
             if (this.actionTable[action]) {
-                this.actionTable[action](payload);
+                this.actionTable[action]({ messageId, ...payload });
             }
         };
     }
