@@ -41,6 +41,16 @@ class WorkerClient {
                 });
             });
         };
+        this.cleanup = () => {
+            if (this.worker instanceof Worker) {
+                this.worker.terminate();
+                return;
+            }
+            if (this.worker instanceof MessagePort) {
+                this.worker.close();
+                return;
+            }
+        };
         this.addActions(actions);
         this.worker.onmessage = (event) => {
             const { action, messageId, payload } = event.data;

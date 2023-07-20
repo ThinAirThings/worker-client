@@ -51,4 +51,14 @@ export class WorkerClient {
         })
 
     }
+    cleanup = () => {
+        if (this.worker instanceof Worker) {
+            this.worker.terminate()
+            return
+        }
+        if (this.worker instanceof MessagePort) {
+            this.worker.close()
+            return
+        }
+    }
 }
