@@ -4,7 +4,7 @@ import {nanoid} from 'nanoid'
 type WorkerActionCallback = (payload: any, reply: (payload: Record<string, any>)=>void)=>void
 export class WorkerClient {
     actionTable: Record<string, (rxPayload: any)=>void> = {}
-    constructor(public worker: Worker, actions: Record<string, WorkerActionCallback>){
+    constructor(public worker: Worker | MessagePort, actions: Record<string, WorkerActionCallback>){
         this.addActions(actions)
         this.worker.onmessage = (event: MessageEvent<{action: string, messageId?:string, payload: any}>) => {
             const {action, messageId, payload} = event.data
