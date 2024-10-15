@@ -1,4 +1,4 @@
-import {rxToTx} from '../../shared/txRx'
+import { rxToTx } from '@thinairthings/txrx'
 import {nanoid} from 'nanoid'
 
 type WorkerActionCallback = (payload: any, reply: (payload: Record<string, any>)=>void)=>void
@@ -13,9 +13,6 @@ export class WorkerClient {
             } 
         } 
     }
-    // addAction = (action: string, callback: WorkerActionCallback) => {
-    //     this.on(rxToTx(action), callback)
-    // }
     addActions = (actions: Record<string, WorkerActionCallback>) => {
         for (const [action, callback] of Object.entries(actions)){
             this.actionTable[rxToTx(action)]= (rxPayload: {messageId: string}) => {

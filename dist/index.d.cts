@@ -1,5 +1,5 @@
 type WorkerActionCallback = (payload: any, reply: (payload: Record<string, any>) => void) => void;
-export declare class WorkerClient {
+declare class WorkerClient {
     worker: Worker | MessagePort;
     actionTable: Record<string, (rxPayload: any) => void>;
     constructor(worker: Worker | MessagePort, actions: Record<string, WorkerActionCallback>);
@@ -8,4 +8,5 @@ export declare class WorkerClient {
     fetch: (action: string, txPayload?: Record<string, any>) => Promise<Record<string, unknown>>;
     cleanup: () => void;
 }
-export {};
+
+export { WorkerClient };

@@ -1,24 +1,42 @@
 {
   "name": "@thinairthings/worker-client",
-  "version": "1.0.21",
+  "version": "1.0.22",
+  "type": "module",
   "description": "Basic worker client io utilities",
-  "main": "dist/worker-client/src/index.js",
-  "types": "dist/worker-client/src/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThinAirThings/websocket-client.git"
+    "url": "https://github.com/ThinAirThings/worker-client.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "npmpub": "tsc && git add . && git commit -m \"mod\" && git push && npm version patch && npm publish --access public"
+    "build": "tsup",
+    "wipset": "changeset && changeset version && changeset publish && git add . && git commit -m 'wipset' && git push"
   },
   "keywords": [],
   "author": "Dan Lannan",
   "license": "MIT",
   "dependencies": {
+    "@thinairthings/txrx": "^1.0.1",
     "nanoid": "^3.3.6"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
   }
 }
